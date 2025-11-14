@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Si la ruta solicitada no es un archivo existente
+RewriteCond %{REQUEST_FILENAME} !-f
+# Si la ruta solicitada no es un directorio existente  
+RewriteCond %{REQUEST_FILENAME} !-d
+# Redirigir todas las rutas a index.html
+RewriteRule . /index.html [L]

@@ -1,0 +1,13 @@
+title: Bammon | Precisión y Perfección
+description: Tableros | Backgammon & Ajedrez
+theme: jekyll-theme-cayman
+permalink: pretty
+include: [".htaccess", "404.html"]
+
+# Configuración para SPA
+plugins:
+  - jekyll-redirect-from
+
+# Configuración de build
+build:
+  output: public

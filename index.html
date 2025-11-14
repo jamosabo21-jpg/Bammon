@@ -94,6 +94,32 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=3405456359594778&amp;ev=PageView&amp;noscript=1"></noscript>
 
-    
+<script>
+    // Manejo de redirección para SPA
+    (function() {
+        // Recuperar la ruta guardada
+        const redirectPath = sessionStorage.getItem('redirect');
+        
+        if (redirectPath) {
+            sessionStorage.removeItem('redirect');
+            
+            // Verificar que no estamos ya en esa ruta
+            if (redirectPath !== window.location.pathname + window.location.search + window.location.hash) {
+                // Usar replaceState para cambiar la URL sin recargar
+                window.history.replaceState(null, null, redirectPath);
+                
+                // Disparar un evento personalizado para que Framer detecte el cambio
+                window.dispatchEvent(new PopStateEvent('popstate'));
+            }
+        }
+        
+        // Manejo de errores 404 en tiempo real
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'LINK' || e.target.tagName === 'SCRIPT') {
+                console.log('Resource loading error handled by SPA routing');
+            }
+        });
+    })();
+</script>
 </body>
 </html>
